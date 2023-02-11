@@ -13,7 +13,9 @@ function App() {
   } 
 
   useEffect(() => {
-    setInterval(fetchData(), 15000);   
+    const timer = setInterval(() => {
+      fetchData();
+    }, 15000);
   }, []); 
 
   return (
@@ -25,7 +27,7 @@ function App() {
 
       <div className="content">
           <h2>{displayApi}</h2>
-          <button onClick={fetchData}>Change qoute</button>
+          <button onClick={fetchData}>New Tip</button>
       </div>
 
       <div className='footer'>
