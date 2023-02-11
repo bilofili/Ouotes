@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import video from './Skyscrapers.mp4'; 
 import './App.css';
 
 function App() {
+
+  const [displayApi, setDisplayApi] = useState("");
+  
+      async function fetchData() {
+      const response = await fetch("http://www.boredapi.com/api/activity/");
+      const data = await response.json();
+      setDisplayApi(data.activity);  
+  } 
+
+  useEffect(() => {
+    setInterval(fetchData(), 15000);   
+  }, []); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+
+      <video autoPlay loop muted playsInline preload='yes'>
+          <source src={video} type="video/mp4" />  
+      </video>
+
+      <div className="content">
+          <h2>{displayApi}</h2>
+          <button onClick={fetchData}>Change qoute</button>
+      </div>
+
+      <div className='footer'>
+        <p>created by Bilobrov Filip 2023 all rights reserved</p>
+      </div>
+
     </div>
   );
 }
