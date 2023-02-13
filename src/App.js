@@ -13,9 +13,14 @@ function App() {
   } 
 
   useEffect(() => {
+    fetchData();
+  }, []); 
+
+  useEffect(() => {
     const timer = setInterval(() => {
-      fetchData();
+      fetchData()
     }, 15000);
+    return () => clearInterval(timer);
   }, []); 
 
   return (
